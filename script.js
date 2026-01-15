@@ -150,9 +150,9 @@ window.addEventListener("pointerup", () => {
   isDragging = false;
   card.classList.remove("dragging");
 
-  if (currentX > 80) {
+  if (currentX > 1) {
     swipe("right");
-  } else if (currentX < -80) {
+  } else if (currentX < -1) {
     swipe("left");
   } else {
     // 回彈
