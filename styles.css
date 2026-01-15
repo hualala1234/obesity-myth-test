@@ -1,0 +1,239 @@
+/* ===== Base ===== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+
+  background-image: url("bg.png"); /* TODO: 改成你的背景圖片路徑 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f5f6fa;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* ===== Start Screen ===== */
+.start-screen {
+  min-height: 100vh;
+  padding: 18px 16px 22px;
+  box-sizing: border-box;
+}
+
+
+.start-inner {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  place-items: center;
+  margin: 8px 0 14px;
+}
+
+.hero-badge {
+  position: relative; /* ✅ 讓 hero-decoration 絕對定位以它為基準 */
+  width: min(320px, 86vw);
+  aspect-ratio: 1/1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+  text-align: center;
+  padding: 34px 22px 26px;
+  box-sizing: border-box;
+
+  /* ✅ 用 flex 直向排版更穩 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-decoration {
+  position: absolute;
+  inset: 18px;               /* ✅ 內縮一圈（比你手動算寬高穩） */
+  border-radius: 999px;
+  border: 2px solid rgba(222, 90, 90, 0.65);
+  pointer-events: none;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  color: #cc6b6b;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #cc6b6b;
+  opacity: 0.95;
+}
+
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+.dot.red { background: #d65b5b; }
+.dot.yellow { background: #e0b04f; }
+.dot.green { background: #61b86a; }
+.dot.purple { background: #6d5bd6; }
+
+.start-copy {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 14px 14px;
+  color: #3b3b3b;
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.start-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  border: 2px solid rgba(222, 90, 90, 0.75);
+  background: rgba(255, 255, 255, 0.88);
+  color: #cc6b6b;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.start-btn:hover {
+  background: rgb(255 189 189 / 75%);
+}
+
+.start-btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Quiz App ===== */
+/* 測驗頁：上方文字 + 中間卡片 + 下方大圓按鈕 */
+.app {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 18px 16px 26px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 上方區（題目進度 + 標題） */
+.quiz-top {
+  margin-top: 6px;
+}
+
+.progress {
+  text-align: left;
+  margin-bottom: 8px;
+  color: rgba(0,0,0,0.6);
+  font-size: 13px;
+}
+
+.quiz-title {
+  text-align: center;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.65);
+  padding: 10px 12px;
+
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+}
+
+/* 卡片：含圖片 + 題目文字 */
+.card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 18px 16px 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  transition: transform 0.3s ease, opacity 0.15s ease;
+}
+
+.card.dragging { transition: none; }
+
+.card-media {
+  background: #f7efe6;
+  border-radius: 16px;
+  padding: 14px;
+  display: grid;
+  place-items: center;
+}
+
+.card-media img {
+  width: min(220px, 70vw);
+  height: auto;
+  display: block;
+}
+
+.card-text {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #e57373; /* 題目粉紅字，接近你示意圖 */
+  padding: 4px 6px 2px;
+}
+
+/* 下方圓形按鈕 */
+.actions.actions-circle {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 6px 0;
+}
+
+.circle-btn {
+  width: 88px;
+  height: 88px;
+  border-radius: 999px;
+  border: 3px solid rgba(222, 90, 90, 0.55);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(6px);
+  font-size: 34px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.circle-btn.left {
+  color: rgba(222, 90, 90, 0.85);
+}
+
+.circle-btn.right {
+  color: rgba(222, 90, 90, 0.85);
+}
+
+.circle-btn:active {
+  transform: translateY(1px) scale(0.99);
+}

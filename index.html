@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>健康迷思滑動測驗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Chart.js for 雷達圖 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <!-- 進入測驗頁 -->
+    <section class="start-screen" id="startScreen" aria-label="開始頁">
+    <div class="start-inner">
+
+        <div class="hero">
+        <div class="hero-badge">
+            <div class="hero-decoration"></div>
+            <h1 class="hero-title">肥胖迷思<br/>大挑戰</h1>
+            <p class="hero-subtitle">30 秒測驗，選對觀念，養成好習慣</p>
+            <div class="hero-dots" aria-hidden="true">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="dot purple"></span>
+            </div>
+        </div>
+        </div>
+
+        <div class="start-copy">
+        <p><strong>你聽過的減重方法，真的都正確嗎？</strong></p>
+        <p>
+            「肥胖」不只和意志力有關，也牽涉到飲食環境、睡眠壓力與身體調節。
+            30 秒測驗，帶你用簡單題目辨別常見迷思，少走冤枉路，讓健康習慣更好開始。
+        </p>
+        </div>
+
+        <button class="start-btn" id="startBtn" type="button">開始挑戰</button>
+
+    </div>
+    </section>
+
+    <!-- 原本測驗（先隱藏） -->
+    <div class="app is-hidden" id="quizApp">
+        <header class="quiz-top">
+            <div class="progress" id="progress"></div>
+            <div class="quiz-title" id="quizTitle">以下敘述是否正確？</div>
+        </header>
+
+        <div class="card" id="card"></div>
+
+        <div class="actions actions-circle">
+            <button class="circle-btn left" aria-label="不符合" onclick="swipe('left')">
+            ✕
+            </button>
+            <button class="circle-btn right" aria-label="符合" onclick="swipe('right')">
+            ○
+            </button>
+        </div>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
