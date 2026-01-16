@@ -1,7 +1,7 @@
 const questions = [
   // 一、體型與數字
-  { text: "我通常很相信家用體脂機顯示的數字。", category: "body", type: "myth", image: "images/scale.png" },
-  { text: "我知道體重可以常量，但重點是看一段時間的變化趨勢。", category: "body", type: "correct", image: "images/scale.png" },
+  { text: "我通常很相信家用體脂機所顯示的數字。", category: "body", type: "myth", image: "images/scale.png" },
+  { text: "我知道體重可以常量，但重點是看一段時間的變化趨勢。", category: "body", type: "correct", image: "images/trend.png" },
   { text: "只要 BMI 在正常範圍，我就不太擔心健康問題。", category: "body", type: "myth", image: "images/scale.png" },
 
   // 二、飲食與運動
@@ -88,43 +88,49 @@ function showResult() {
   });
 }
 
-// renderQuestion();
-
 function swipe(direction) {
   const q = questions[index];
 
-  // ✅ 計分（邏輯在這裡）
+  // ✅ 計分（邏輯 B）
   if (q.type === "correct") {
     if (direction === "right") score[q.category] += 2;
   } else if (q.type === "myth") {
     if (direction === "left") score[q.category] += 1;
   }
 
-  // ✅ 動畫（維持你現在正常的）
+  // 1) 先讓舊卡片滑出（可同時淡出）
+  card.style.opacity = "0"; // 想滑出時不淡出可改成 "1"
   card.style.transform =
-    direction === "right"
-      ? "translateX(120vw)"
-      : "translateX(-120vw)";
+    direction === "right" ? "translateX(120vw)" : "translateX(-120vw)";
 
+  // 2) 等滑出動畫結束
   setTimeout(() => {
-    card.style.opacity = "0";
+    // 2-1) 關掉 transition，準備「無動畫瞬移回中間」
+    card.classList.add("dragging"); // dragging => transition: none
 
-    card.classList.add("dragging");
+    // 2-2) 關鍵：回到原位時仍保持透明（避免看到回來）
+    card.style.opacity = "0";
     card.style.transform = "translateX(0)";
 
+    // 2-3) 換下一題內容
     index++;
-
     if (index < questions.length) {
       renderQuestion();
     } else {
-      showResult(); // 最後成績單
+      showResult();
+      return;
     }
 
+    // 2-4) 用兩次 requestAnimationFrame，確保：
+    //      (a) 「瞬移回原位且透明」先被繪製
+    //      (b) 再開啟 transition 進行淡入
     requestAnimationFrame(() => {
-      card.classList.remove("dragging");
-      card.style.opacity = "1";
+      requestAnimationFrame(() => {
+        card.classList.remove("dragging"); // 恢復 transition
+        card.style.opacity = "1";          // 下一張才淡入
+      });
     });
-  }, 300);
+  }, 300); // 要跟 transform 的 0.3s 對齊
 }
 
 
@@ -150,9 +156,9 @@ window.addEventListener("pointerup", () => {
   isDragging = false;
   card.classList.remove("dragging");
 
-  if (currentX > 1) {
+  if (currentX > 10) {
     swipe("right");
-  } else if (currentX < -1) {
+  } else if (currentX < -10) {
     swipe("left");
   } else {
     // 回彈
