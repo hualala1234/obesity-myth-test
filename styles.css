@@ -109,12 +109,15 @@ body {
   margin-top: 16px;
   padding: 14px 12px;
   border-radius: 14px;
-  border: 2px solid rgba(222, 90, 90, 0.75);
+  border: 2px solid rgba(222, 90, 90, 0.37);
   background: rgba(255, 255, 255, 0.88);
   color: #cc6b6b;
   font-weight: 800;
   font-size: 16px;
   cursor: pointer;
+  box-shadow:
+    4px 4px 0 rgba(222, 90, 90, 0.35),   /* 厚度塊（硬邊） */
+    12px 14px 18px rgba(0, 0, 0, 0.10); 
 }
 
 .start-btn:hover {
@@ -146,10 +149,31 @@ body {
 }
 
 .progress {
-  text-align: left;
-  margin-bottom: 8px;
+  width: 100%;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: rgba(222, 90, 90, 0.75);
+  transition: width 0.35s ease;
+}
+
+.progress-label {
+  margin-top: 6px;
+  font-size: 12px;
   color: rgba(0,0,0,0.6);
-  font-size: 13px;
+  text-align: left;
 }
 
 .quiz-title {
@@ -175,7 +199,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: transform 0.8s ease, opacity 0.8s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+
 }
 
 .card.dragging { transition: none; }
@@ -189,12 +214,13 @@ body {
 }
 
 .card-media img {
-  width: min(220px, 70vw);
+  /* width: min(220px, 70vw); */
   height: auto;
   display: block;
   pointer-events: none;
   -webkit-user-drag: none; /* iOS/Safari 避免拖曳圖片 */
   user-select: none;
+  height: 216.45px;
 }
 
 .card-text {
@@ -203,6 +229,8 @@ body {
   font-weight: 800;
   color:   #e6908f; /* 題目粉紅字，接近你示意圖 */
   padding: 4px 6px 2px;
+  line-height: 1.35;                 /* ✅ 先固定行高 */
+  min-height: calc(1.35em * 2)
 }
 
 /* 下方圓形按鈕 */
@@ -250,4 +278,85 @@ body {
   transform: translate(-50%, -50%);
   
 
+}
+
+/* 結果頁 */
+.result-screen {
+  min-height: 100vh;
+  padding: 18px 16px 22px;
+  box-sizing: border-box;
+}
+
+.result-inner {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.result-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: rgba(0,0,0,0.7);
+  margin: 8px 0 0;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.result-card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;      /* ✅ 你想要的高度，可調 */
+}
+
+#chart {
+  width: 100% !important;
+  height: 100% !important;  /* ✅ 改成跟 chart-wrap 一樣高 */
+  display: block;
+}
+
+/* 錯題解析 */
+.result-review {
+  padding: 14px;
+  color: #3b3b3b;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.review-item {
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+.review-item + .review-item {
+  margin-top: 10px;
+}
+
+.review-q {
+  font-weight: 900;
+  color: #cc6b6b;
+  margin-bottom: 6px;
+}
+
+.review-meta {
+  font-size: 12px;
+  color: rgba(0,0,0,0.55);
+  margin-bottom: 6px;
+}
+
+.review-explain {
+  margin: 0;
 }

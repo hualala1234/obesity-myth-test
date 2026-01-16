@@ -67,6 +67,23 @@
             </button>
         </div>
     </div>
+    <!-- 結果頁（先隱藏） -->
+    <section class="result-screen is-hidden" id="resultScreen" aria-label="結果頁">
+        <div class="result-inner">
+            <div class="result-card">
+            <h2 class="result-title">你的肥胖迷思雷達圖</h2>
+
+            <div class="chart-wrap">
+                <canvas id="chart"></canvas>
+            </div>
+
+            <h2 class="result-title">錯題分析</h2>
+            <div class="result-review" id="resultReview"></div>
+            </div>
+
+            <button class="start-btn" id="restartBtn" type="button">再測一次</button>
+        </div>
+    </section>
 
   <script src="script.js"></script>
 </body>
