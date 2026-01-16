@@ -311,8 +311,8 @@ window.addEventListener("pointerup", () => {
   isDragging = false;
   card.classList.remove("dragging");
 
-  if (currentX > 80) swipe("right");
-  else if (currentX < -80) swipe("left");
+  if (currentX > 10) swipe("right");
+  else if (currentX < -10) swipe("left");
   else card.style.transform = "translateX(0)";
 
   currentX = 0;
