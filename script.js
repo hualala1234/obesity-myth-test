@@ -311,7 +311,7 @@ window.addEventListener("pointerup", () => {
   if (!isDragging) return;
   isDragging = false;
 
-  const SWIPE_THRESHOLD = 80;
+  const SWIPE_THRESHOLD = 40;
 
   if (currentX > SWIPE_THRESHOLD) {
     // ✅ 不要先移除 dragging，交給 swipe() 接管動畫
