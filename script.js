@@ -231,6 +231,7 @@ function swipe(direction) {
     if (isTransitioning) return;
     isTransitioning = true;
     setControlsDisabled(true);
+    card.classList.remove("dragging");
 
     const q = questions[index];
   // 記錄作答（先寫入當下 index，因為下面會 index++）
@@ -309,11 +310,19 @@ window.addEventListener("pointerup", () => {
 
   if (!isDragging) return;
   isDragging = false;
-  card.classList.remove("dragging");
 
-  if (currentX > 10) swipe("right");
-  else if (currentX < -10) swipe("left");
-  else card.style.transform = "translateX(0)";
+  const SWIPE_THRESHOLD = 80;
+
+  if (currentX > SWIPE_THRESHOLD) {
+    // ✅ 不要先移除 dragging，交給 swipe() 接管動畫
+    swipe("right");
+  } else if (currentX < -SWIPE_THRESHOLD) {
+    swipe("left");
+  } else {
+    // ✅ 只有回彈才恢復 transition
+    card.classList.remove("dragging");
+    card.style.transform = "translateX(0)";
+  }
 
   currentX = 0;
 });
