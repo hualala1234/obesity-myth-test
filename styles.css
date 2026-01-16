@@ -230,7 +230,7 @@ body {
   color:   #e6908f; /* 題目粉紅字，接近你示意圖 */
   padding: 4px 6px 2px;
   line-height: 1.35;                 /* ✅ 先固定行高 */
-  min-height: calc(1.35em * 2)
+  min-height: calc(1.35em * 3)
 }
 
 /* 下方圓形按鈕 */
